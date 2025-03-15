@@ -5,14 +5,16 @@ precision highp float;
 uniform vec2 resolution;
 
 void main() {;
-    // フラグメント座標を複素数平面上の座標に変換
+    // 複素数平面上の座標
     vec2 complex_c = vec2(
-        gl_FragCoord.x / resolution.x,
-        gl_FragCoord.y / resolution.y
+        gl_FragCoord.x / 500.0 - 2.0,
+        gl_FragCoord.y / 500.0 - 0.7
     );
 
+    // 漸化式の初期値を設定
     vec2 complex_z = vec2(0.0, 0.0);
     for (int i = 0;i < 2048; i++) {
+        // ベクトルを用いて擬似的に複素数の二乗して座標を足している
         complex_z = vec2(
             complex_z.x * complex_z.x - complex_z.y * complex_z.y + complex_c.x,
             2.0 * complex_z.x * complex_z.y + complex_c.y
