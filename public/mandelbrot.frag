@@ -21,7 +21,7 @@ void main() {;
 
     // 漸化式の初期値を設定
     vec2 complex_z = vec2(0.0, 0.0);
-    for (int i = 0;i < 2048; i++) {
+    for (int i = 0;i < 16384; i++) {
         // ベクトルを用いて擬似的に複素数の二乗して座標を足している
         complex_z = vec2(
             complex_z.x * complex_z.x - complex_z.y * complex_z.y + complex_c.x,
@@ -29,7 +29,7 @@ void main() {;
         );
 
         if(length(complex_z) > 2.0){
-             gl_FragColor = vec4(0.0, i / 128, i / 256, 1.0);
+             gl_FragColor = vec4(i/ 16384, i / 128, i / 256, 1.0);
              return;
         }
     }

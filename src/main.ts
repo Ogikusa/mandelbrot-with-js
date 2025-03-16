@@ -1,6 +1,5 @@
 import P5 from "p5";
 import CONSTANTS from "./constants";
-import { createGraph } from "./lib/graph";
 
 const sketch = (p: P5) => {
   let myShader: P5.Shader;
@@ -13,6 +12,7 @@ const sketch = (p: P5) => {
   p.setup = () => {
     p.createCanvas(CONSTANTS.width, CONSTANTS.height, p.WEBGL);
     p.shader(myShader);
+    p.frameRate(15);
   };
 
   p.draw = () => {
@@ -38,7 +38,12 @@ const sketch = (p: P5) => {
     if (p.key === "z") {
       zoom *= 1.1;
     }
-    if (p.key === "r") {
+    if (p.key === "x") {
+      zoom /= 1.1;
+    }
+    if (p.key === "R") {
+      offset[0] = 0.0;
+      offset[1] = 0.0;
       zoom = 1.0;
     }
   };
