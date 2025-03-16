@@ -3,12 +3,13 @@ precision highp float;
 #endif
 
 uniform vec2 resolution;
+uniform vec2 offset;
 
 void main() {;
     // 複素数平面上の座標
     vec2 complex_c = vec2(
-        gl_FragCoord.x / 500.0 - 2.0,
-        gl_FragCoord.y / 500.0 - 0.7
+        gl_FragCoord.x / 500.0 - offset.x,
+        gl_FragCoord.y / 500.0 - offset.y
     );
 
     // 漸化式の初期値を設定
