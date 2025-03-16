@@ -4,13 +4,20 @@ precision highp float;
 
 uniform vec2 resolution;
 uniform vec2 offset;
+uniform float zoom;
 
 void main() {;
+    // フラグメントシェーダーの座標を0.0 - 1.0の範囲に正規化
+    float aspectRatio = resolution.x / resolution.y;
+    vec2 uv = gl_FragCoord.xy / resolution * 2.0 - 1.0;
+    uv.x *= aspectRatio; // X軸を補正
+
+
     // 複素数平面上の座標
     vec2 complex_c = vec2(
-        gl_FragCoord.x / 500.0 - offset.x,
-        gl_FragCoord.y / 500.0 - offset.y
-    );
+        uv.x / zoom - offset.x ,
+        uv.y / zoom - offset.y
+    ); 
 
     // 漸化式の初期値を設定
     vec2 complex_z = vec2(0.0, 0.0);
@@ -22,7 +29,7 @@ void main() {;
         );
 
         if(length(complex_z) > 2.0){
-             gl_FragColor = vec4(255, 255, 255, 1.0);
+             gl_FragColor = vec4(0.0, i / 128, i / 256, 1.0);
              return;
         }
     }
